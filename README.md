@@ -1,153 +1,67 @@
-# Smart Billing & Discount Engine - Java OOP
+# Smart Billing & Discount Engine
 
-A pure **OOP-based** billing and discount engine in Java that demonstrates core object-oriented programming concepts.
+I built this small Java console project to practise OOP and the Strategy pattern. It adds up a sample shopping cart, applies a discount, and prints the bill summary.
 
-## Project Overview
+## What it does
 
-This system calculates final bill prices using different discount strategies:
-- Percentage-based discounts
-- Fixed-amount discounts  
-- Buy-One-Get-One (BOGO) discounts
+The demo uses three strategies:
 
-## OOP Concepts Demonstrated
+- Percentage discount: takes a percentage off the cart total.
+- Fixed discount: subtracts a set amount, without letting the final amount go below zero.
+- `BuyOneGetOneDiscount`: currently halves the whole cart total. This is a placeholder, not an item-based buy-one-get-one offer.
 
-✓ **Abstraction** - `DiscountStrategy` interface  
-✓ **Encapsulation** - Private fields in `Item` class  
-✓ **Inheritance** - Strategy classes implement interface  
-✓ **Polymorphism** - `BillingEngine` works with any strategy  
-✓ **Composition** - `ShoppingCart` contains `Item` objects  
-✓ **Method Overriding** - Each strategy overrides `applyDiscount()`  
-✓ **Real Business Logic** - Complex discount algorithms
+`ShoppingCart` holds the items, `DiscountStrategy` defines the discount method, and `BillingEngine` uses whichever strategy it receives.
 
-## How to Run
+## Run it
 
-### Option 1: Using Shell Script
+You need a JDK (Java 8 or newer), with both `javac` and `java` available. Run these commands from the project folder:
+
 ```bash
-bash run.sh
+mkdir -p build
+javac -encoding UTF-8 -d build App.java BillingEngine.java cart/*.java discount/*.java
+java -cp build App
 ```
 
-### Option 2: Simple Compilation & Run
-```bash
-javac app.java
-java App
-```
+The entry file is `App.java`, with a capital A. Compiled files go into `build/`, which is ignored by Git.
 
-## Project Structure
-```
+## Sample result
+
+The sample cart contains 3 pens at Rs 20 each, 2 notebooks at Rs 50 each, and 5 pencils at Rs 10 each. Its total is Rs 210.
+
+| Strategy | Discount | Final amount |
+| --- | --- | --- |
+| 10% off | Rs 21 | Rs 189 |
+| Rs 40 off | Rs 40 | Rs 170 |
+| Current half-total placeholder | Rs 105 | Rs 105 |
+
+These are three separate examples on the same cart, not discounts stacked together.
+
+## Project structure
+
+```text
 java-oop-billing-engine/
-│
-├── discount/
-│   ├── DiscountStrategy.java      (Interface)
-│   ├── PercentageDiscount.java    (10% off)
-│   ├── FixedAmountDiscount.java   (Rs 40 off)
-│   └── BuyOneGetOneDiscount.java  (50% off)
-│
+├── App.java
+├── BillingEngine.java
 ├── cart/
-│   ├── Item.java                  
-│   └── ShoppingCart.java          
-│
-├── BillingEngine.java             
-├── App.java                       
-├── run.sh                         
-└── README.md                      
+│   ├── Item.java
+│   └── ShoppingCart.java
+├── discount/
+│   ├── DiscountStrategy.java
+│   ├── PercentageDiscount.java
+│   ├── FixedAmountDiscount.java
+│   └── BuyOneGetOneDiscount.java
+├── .gitignore
+└── README.md
 ```
 
-## Expected Output
-```
-========================================
-  Smart Billing & Discount Engine
-========================================
+## Scope
 
---- Shopping Cart Items ---
-Pen x 3 @ Rs 20.0 = Rs 60.0
-Notebook x 2 @ Rs 50.0 = Rs 100.0
-Pencil x 5 @ Rs 10.0 = Rs 50.0
+This is a learning project, not a production billing system. It currently uses `double` for money, and the billing summary does not handle a zero cart total separately. The next improvements would be money handling, item-based BOGO logic, and tests.
 
-Base Amount: Rs 210.0
+## Add a discount
 
-========================================
-  Testing Different Discount Strategies
-========================================
-
---- Billing Summary ---
-Base Amount: Rs 210.00
-Discount Amount: Rs 21.00
-Discount Percentage: 10.00%
-Final Amount: Rs 189.00
-
---- Billing Summary ---
-Base Amount: Rs 210.00
-Discount Amount: Rs 40.00
-Discount Percentage: 19.05%
-Final Amount: Rs 170.00
-
---- Billing Summary ---
-Base Amount: Rs 210.00
-Discount Amount: Rs 105.00
-Discount Percentage: 50.00%
-Final Amount: Rs 105.00
-
-========================================
-  OOP Concepts Demonstrated:
-========================================
-✓ Abstraction: DiscountStrategy interface hides discount details
-✓ Encapsulation: Item class uses private fields
-✓ Inheritance: Discount classes follow DiscountStrategy interface
-✓ Polymorphism: BillingEngine accepts any discount type
-✓ Composition: Cart contains a list of Items
-✓ Method Overriding: applyDiscount() differs in each discount class
-```
-
-## System Requirements
-
-- Java 8 or higher
-- javac compiler
-
-Check Java version:
-```bash
-java -version
-javac -version
-```
-
-## Design Pattern
-
-This project implements the **Strategy Design Pattern**:
-- **Context**: `BillingEngine`
-- **Strategy Interface**: `DiscountStrategy`
-- **Concrete Strategies**: `PercentageDiscount`, `FixedAmountDiscount`, `BuyOneGetOneDiscount`
-
-## How to Extend
-
-Add new discount strategies by:
-1. Create a new class implementing `DiscountStrategy`
-2. Override `applyDiscount()` method
-3. Use it in `App.java`
-
-Example:
-```java
-public class SeasonalDiscount implements DiscountStrategy {
-    private double discountPercent;
-    
-    public SeasonalDiscount(double discountPercent) {
-        this.discountPercent = discountPercent;
-    }
-    
-    @Override
-    public double applyDiscount(double amount) {
-        return amount - (amount * discountPercent / 100);
-    }
-}
-```
+Implement `discount.DiscountStrategy`, define `applyDiscount(double amount)`, and use the new strategy in `App.java`.
 
 ## Author
 
-**Mitesh Anshu**  
-GitHub: [@miteshanshu](https://github.com/miteshanshu)
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-⭐ If you found this helpful, consider giving it a star!
+Mitesh Anshu - [@miteshanshu](https://github.com/miteshanshu)

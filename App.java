@@ -48,7 +48,7 @@ public class App {
 
         // using buy-one-get-one discount
         DiscountStrategy bogoDiscount = new BuyOneGetOneDiscount();
-        double finalAmount3 = engine.getFinalAmount(total, bogoDiscount);
+        double finalAmount3 = engine.getFinalAmount(cart.getItems(), bogoDiscount);
         engine.printBillingSummary(total, finalAmount3);
 
         // listing the OOP ideas used in this project

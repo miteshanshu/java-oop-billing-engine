@@ -8,7 +8,7 @@ The demo uses three strategies:
 
 - Percentage discount: takes a percentage off the cart total.
 - Fixed discount: subtracts a set amount, without letting the final amount go below zero.
-- `BuyOneGetOneDiscount`: currently halves the whole cart total. This is a placeholder, not an item-based buy-one-get-one offer.
+- `BuyOneGetOneDiscount`: item-based buy-one-get-one. For every 2 units of an item, 1 is free (so 3 pens means 1 free, 5 pencils means 2 free). It needs the cart items, so call `getFinalAmount(cart.getItems(), strategy)`.
 
 `ShoppingCart` holds the items, `DiscountStrategy` defines the discount method, and `BillingEngine` uses whichever strategy it receives.
 
@@ -32,7 +32,7 @@ The sample cart contains 3 pens at Rs 20 each, 2 notebooks at Rs 50 each, and 5 
 | --- | --- | --- |
 | 10% off | Rs 21 | Rs 189 |
 | Rs 40 off | Rs 40 | Rs 170 |
-| Current half-total placeholder | Rs 105 | Rs 105 |
+| Buy one get one | Rs 90 | Rs 120 |
 
 These are three separate examples on the same cart, not discounts stacked together.
 
@@ -56,11 +56,11 @@ java-oop-billing-engine/
 
 ## Scope
 
-This is a learning project, not a production billing system. It currently uses `double` for money, and the billing summary does not handle a zero cart total separately. The next improvements would be money handling, item-based BOGO logic, and tests.
+This is a learning project, not a production billing system. It currently uses `double` for money, and the billing summary does not handle a zero cart total separately. The next improvements would be money handling and tests.
 
 ## Add a discount
 
-Implement `discount.DiscountStrategy`, define `applyDiscount(double amount)`, and use the new strategy in `App.java`.
+Implement `discount.DiscountStrategy`, define `applyDiscount(double amount)` (override `applyDiscount(List<Item>)` too if it depends on items), and use the new strategy in `App.java`.
 
 ## Author
 

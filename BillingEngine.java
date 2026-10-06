@@ -1,4 +1,6 @@
+import cart.Item;
 import discount.DiscountStrategy;
+import java.util.List;
 
 // This class handles applying discounts and printing the final bill
 public class BillingEngine {
@@ -6,6 +8,11 @@ public class BillingEngine {
     // uses polymorphism because it can work with any discount type
     public double getFinalAmount(double baseAmount, DiscountStrategy strategy) {
         return strategy.applyDiscount(baseAmount);
+    }
+
+    // same thing but gives the strategy the cart items, needed for item based discounts like BOGO
+    public double getFinalAmount(List<Item> items, DiscountStrategy strategy) {
+        return strategy.applyDiscount(items);
     }
 
     // prints the billing details like base amount, discount, and final amount

@@ -28,6 +28,13 @@ public class ShoppingCart {
     }
 
     /**
+     * Returns a copy of the items in the cart.
+     */
+    public List<Item> getItems() {
+        return new ArrayList<>(items);
+    }
+
+    /**
      * Returns number of items in cart.
      */
     public int getItemCount() {

@@ -10,7 +10,7 @@ The demo uses three strategies:
 - Fixed discount: subtracts a set amount, without letting the final amount go below zero.
 - `BuyOneGetOneDiscount`: item-based buy-one-get-one. For every 2 units of an item, 1 is free (so 3 pens means 1 free, 5 pencils means 2 free). It needs the cart items, so call `getFinalAmount(cart.getItems(), strategy)`.
 
-`ShoppingCart` holds the items, `DiscountStrategy` defines the discount method, and `BillingEngine` uses whichever strategy it receives.
+`ShoppingCart` holds the items, `DiscountStrategy` defines the discount method, and `BillingEngine` uses whichever strategy it receives. After the three bills, the program also prints the OOP concepts it used, so a run reads like a small checklist of the ideas.
 
 ## Run it
 
@@ -24,17 +24,44 @@ java -cp build App
 
 The entry file is `App.java`, with a capital A. Compiled files go into `build/`, which is ignored by Git.
 
-## Sample result
+## What a run looks like
 
-The sample cart contains 3 pens at Rs 20 each, 2 notebooks at Rs 50 each, and 5 pencils at Rs 10 each. Its total is Rs 210.
+The sample cart has 3 pens at Rs 20, 2 notebooks at Rs 50 and 5 pencils at Rs 10, so the base amount is Rs 210. The program then prints one billing summary per strategy:
 
-| Strategy | Discount | Final amount |
-| --- | --- | --- |
-| 10% off | Rs 21 | Rs 189 |
-| Rs 40 off | Rs 40 | Rs 170 |
-| Buy one get one | Rs 90 | Rs 120 |
+```text
+========================================
+  Smart Billing & Discount Engine
+========================================
 
-These are three separate examples on the same cart, not discounts stacked together.
+--- Shopping Cart Items ---
+Pen x 3 @ Rs 20.0 = Rs 60.0
+Notebook x 2 @ Rs 50.0 = Rs 100.0
+Pencil x 5 @ Rs 10.0 = Rs 50.0
+
+Base Amount: Rs 210.0
+
+--- Billing Summary ---
+Base Amount: Rs 210.00
+Discount Amount: Rs 21.00
+Discount Percentage: 10.00%
+Final Amount: Rs 189.00
+
+--- Billing Summary ---
+Base Amount: Rs 210.00
+Discount Amount: Rs 40.00
+Discount Percentage: 19.05%
+Final Amount: Rs 170.00
+
+--- Billing Summary ---
+Base Amount: Rs 210.00
+Discount Amount: Rs 90.00
+Discount Percentage: 42.86%
+Final Amount: Rs 120.00
+```
+
+The three summaries are the 10% discount, the Rs 40 discount and buy-one-get-one, in that order. These are three separate runs on the same cart, not discounts stacked together. The run then lists the OOP concepts demonstrated, for example "Polymorphism: BillingEngine accepts any discount type".
+
+The buy-one-get-one bill saves Rs 90 because 3 pens give 1 free (Rs 20), 2 notebooks give 1 free (Rs 50) and 5 pencils give 2 free (Rs 20).
 
 ## Project structure
 

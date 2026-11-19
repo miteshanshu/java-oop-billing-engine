@@ -40,6 +40,10 @@ Pencil x 5 @ Rs 10.0 = Rs 50.0
 
 Base Amount: Rs 210.0
 
+========================================
+  Testing Different Discount Strategies
+========================================
+
 --- Billing Summary ---
 Base Amount: Rs 210.00
 Discount Amount: Rs 21.00
@@ -67,18 +71,18 @@ The buy-one-get-one bill saves Rs 90 because 3 pens give 1 free (Rs 20), 2 noteb
 
 ```text
 java-oop-billing-engine/
-├── App.java
-├── BillingEngine.java
-├── cart/
-│   ├── Item.java
-│   └── ShoppingCart.java
-├── discount/
-│   ├── DiscountStrategy.java
-│   ├── PercentageDiscount.java
-│   ├── FixedAmountDiscount.java
-│   └── BuyOneGetOneDiscount.java
-├── .gitignore
-└── README.md
+âââ App.java
+âââ BillingEngine.java
+âââ cart/
+â   âââ Item.java
+â   âââ ShoppingCart.java
+âââ discount/
+â   âââ DiscountStrategy.java
+â   âââ PercentageDiscount.java
+â   âââ FixedAmountDiscount.java
+â   âââ BuyOneGetOneDiscount.java
+âââ .gitignore
+âââ README.md
 ```
 
 ## Scope
